@@ -1,0 +1,80 @@
+2025-01-20 15:03:51,445 - INFO - Inicializando bot---
+2025-01-20 15:07:17,571 - INFO - Inicializando bot---
+2025-01-20 15:10:11,267 - INFO - Inicializando bot---
+2025-01-20 15:38:36,859 - INFO - Inicializando bot---
+2025-01-20 15:38:36,862 - INFO - ====== WebDriver manager ======
+2025-01-20 15:38:37,343 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:38:37,444 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:38:37,517 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:38:37,852 - INFO - WebDriver version 132.0.6834.83 selected
+2025-01-20 15:38:37,856 - INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/132.0.6834.83/linux64/chromedriver-linux64.zip
+2025-01-20 15:38:37,857 - INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/132.0.6834.83/linux64/chromedriver-linux64.zip
+2025-01-20 15:38:38,090 - INFO - Driver downloading response is 200
+2025-01-20 15:38:39,610 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:38:39,927 - INFO - Driver has been saved in cache [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83]
+2025-01-20 15:38:42,060 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-20 15:38:53,674 - INFO - Inicializando bot---
+2025-01-20 15:39:00,461 - INFO - ====== WebDriver manager ======
+2025-01-20 15:39:00,615 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:39:00,680 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:39:00,738 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 15:39:07,155 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-20 15:51:42,225 - INFO - Inicializando bot---
+2025-01-20 15:51:42,229 - INFO - ====== WebDriver manager ======
+2025-01-20 15:51:42,464 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:51:42,537 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:51:42,594 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 15:51:45,221 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-20 15:53:58,633 - INFO - Inicializando bot---
+2025-01-20 15:53:58,639 - INFO - ====== WebDriver manager ======
+2025-01-20 15:53:58,828 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:53:58,928 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:53:58,988 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 15:54:01,335 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-20 15:54:30,637 - INFO - Inicializando bot---
+2025-01-20 15:54:30,644 - INFO - ====== WebDriver manager ======
+2025-01-20 15:54:30,972 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:54:31,063 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:54:31,127 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 15:54:33,357 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-20 15:55:35,554 - INFO - Inicializando bot---
+2025-01-20 15:55:35,557 - INFO - ====== WebDriver manager ======
+2025-01-20 15:55:35,760 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:55:35,907 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:55:35,978 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 15:55:39,911 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-20 15:56:37,100 - INFO - Inicializando bot---
+2025-01-20 15:56:37,106 - INFO - ====== WebDriver manager ======
+2025-01-20 15:56:37,334 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:56:37,726 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:56:37,788 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 15:56:40,328 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-20 15:57:32,427 - INFO - Inicializando bot---
+2025-01-20 15:57:32,429 - INFO - ====== WebDriver manager ======
+2025-01-20 15:57:32,591 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:57:32,651 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 15:57:32,735 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 15:57:34,971 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-20 16:01:10,922 - INFO - Inicializando bot---
+2025-01-20 16:01:10,926 - INFO - ====== WebDriver manager ======
+2025-01-20 16:01:11,079 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 16:01:11,170 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 16:01:11,224 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 16:01:13,592 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-20 16:10:10,846 - INFO - Inicializando bot---
+2025-01-20 16:10:10,849 - INFO - ====== WebDriver manager ======
+2025-01-20 16:10:10,977 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 16:10:11,048 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 16:10:11,120 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 16:10:13,474 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-20 16:14:12,755 - INFO - Inicializando bot---
+2025-01-20 16:14:12,761 - INFO - ====== WebDriver manager ======
+2025-01-20 16:14:12,908 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 16:14:13,000 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 16:14:13,066 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 16:21:02,143 - INFO - Inicializando bot---
+2025-01-20 16:21:02,147 - INFO - ====== WebDriver manager ======
+2025-01-20 16:21:02,279 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 16:21:02,361 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-20 16:21:02,424 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-20 16:21:04,517 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver

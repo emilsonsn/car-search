@@ -1,4 +1,6 @@
-#!/home/emilsonsn/desktop/Emilson/Projetos/2025/Janeiro/car-search/env/bin/python3
+#!/bin/sh
+'''exec' "/home/gabriel/Documentos/Code/Códigos python/car-search/env/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys
