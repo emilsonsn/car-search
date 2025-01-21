@@ -50,28 +50,19 @@ class Main:
         #     exit(1)
         #     pass
         # links = result['data']
-        site = 'OLX'
-        link = 'https://www.olx.com.br/brasil?q=onix'
+        # site = 'OLX'
+        # link = 'https://www.olx.com.br/brasil?q=onix'
         
-        self.options = uc.ChromeOptions()
-        self.options.add_argument("--start-maximized")
-        self.options.add_argument("--disable-infobars")
-        self.options.add_argument("--disable-extensions")
-        self.options.add_argument("--no-sandbox")
-        service = ChromeService(ChromeDriverManager().install())
-        self.driver = uc.Chrome(service=service, options=self.options)  
-        self.driver.get(link)
-        sleep(2)
-        cars = self.driver.find_elements(By.CSS_SELECTOR, '.olx-ad-card.olx-ad-card--horizontal.olx-ad-card--highlight')
-        for i in cars:
-            print(i.text)
-            print(12)
-        
-        
-        
-        
-        
+        # self.olx.process_link(link)
         pass
+        
+            
+            
+            
+            
+            
+        
+        
     
     def send_results_telegram(self, results, groups):
         for link in results:
@@ -82,6 +73,11 @@ class Main:
 
     
     def main(self):
+        # self.olx.process_link(link)
+        
+        
+        
+        
         links = self.getLinks()
 
         for link in links:

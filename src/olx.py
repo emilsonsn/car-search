@@ -1,9 +1,92 @@
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+import undetected_chromedriver as uc
+import traceback
+import logging
+from time import sleep
+import datetime
+import os
+
+data_atual = datetime.datetime.now().strftime('%Y-%m-%d')
+os.makedirs('logs', exist_ok=True)
+logging.basicConfig(level=logging.INFO, filename=f'logs/app_{data_atual}.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
+
 class Olx:
 
     def process_link(self, link):
-        link.url
-        # processar o link e retornar os resultados
-        resultados = {
+        try:
+            logging.info('Abrindo site da OLX ---')
+            self.options = uc.ChromeOptions()
+            self.options.add_argument("--start-maximized")
+            self.options.add_argument("--disable-infobars")
+            self.options.add_argument("--disable-extensions")
+            self.options.add_argument("--no-sandbox")
+            service = ChromeService(ChromeDriverManager().install())
+            self.driver = uc.Chrome(service=service, options=self.options)  
+            self.driver.get(link)
+            sleep(2)
+            self.get_cars() 
+                       
+        except Exception as error:
+            logging.error(f'Erro ao abrir site: {error}')
+            logging.error('Traceback: %s', traceback.format_exc())
+            raise Exception('Erro ao abrir site')
+        
+    def get_cars(self):
+        try:
+            with open('links/linksOlx.txt', "r", encoding="utf-8") as file:
+                links_existentes = {line.strip().rstrip(",") for line in file}
+            logging.info('Procurando carros ---')
+            links_for_telegram = []
             
-        }
-        return resultados
+            for j in range(2):  
+                links = []
+                sleep(10)
+                cars = self.driver.find_elements(By.CSS_SELECTOR, '.olx-ad-card.olx-ad-card--horizontal.olx-ad-card--highlight')
+                for i in cars:
+                    link_element = i.find_element(By.CSS_SELECTOR, "a[data-ds-component='DS-NewAdCard-Link']")
+                    href = link_element.get_attribute("href")
+                    links.append(href)
+                    
+                with open("links/linksOlx.txt", "a", encoding="utf-8") as file:
+                    for link in links:
+                        if link not in links_existentes:
+                            file.write(link + ",\n")
+                            links_for_telegram.append(link)
+                
+                if len(links_existentes) > 500:
+                    links_existentes = links_existentes[-250:] 
+                    with open('links/linksOlx.txt', "w", encoding="utf-8") as file:
+                        for link in links_existentes:
+                            file.write(link + ",\n")
+                            
+                            
+                if j == 1: break
+                self.second_page()
+                sleep(5)
+                
+            return links_for_telegram
+            
+        except Exception as error:
+                logging.error(f'Erro ao tentar encontrar carros: {error}')
+                logging.error('Traceback: %s', traceback.format_exc())
+                raise Exception('Erro ao encontrar carros')
+            
+            
+    def second_page(self):
+        try:
+            logging.info('Indo para segunda página ---')
+            botao = self.driver.find_element(By.CSS_SELECTOR, '.sc-5ebad952-1.wskjO')    
+            self.driver.execute_script("arguments[0].scrollIntoView();", botao)
+            sleep(2)
+            botaos = self.driver.find_elements(By.CSS_SELECTOR, '.olx-core-button.olx-core-button--link.olx-core-button--small.sc-5ebad952-0.gVRVOX')
+            for b in botaos:
+                if b.text.strip() == '2':
+                    b.click()
+                    sleep(2)
+                    break
+        except Exception as error:
+            logging.error(f'Erro ao tentar encontrar botões: {error}')
+            logging.error('Traceback: %s', traceback.format_exc())
+            raise Exception('Erro ao encontrar botões')

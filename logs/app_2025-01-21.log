@@ -1,0 +1,179 @@
+2025-01-21 09:41:41,803 - INFO - Inicializando bot---
+2025-01-21 09:41:41,806 - INFO - ====== WebDriver manager ======
+2025-01-21 09:41:42,232 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 09:41:42,377 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 09:41:42,437 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 09:41:42,688 - INFO - WebDriver version 132.0.6834.83 selected
+2025-01-21 09:41:42,694 - INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/132.0.6834.83/linux64/chromedriver-linux64.zip
+2025-01-21 09:41:42,695 - INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/132.0.6834.83/linux64/chromedriver-linux64.zip
+2025-01-21 09:41:42,937 - INFO - Driver downloading response is 200
+2025-01-21 09:41:43,584 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 09:41:44,027 - INFO - Driver has been saved in cache [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83]
+2025-01-21 09:41:45,239 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:22:52,608 - INFO - Inicializando bot---
+2025-01-21 10:22:52,611 - INFO - Abrindo site da OLX ---
+2025-01-21 10:22:52,613 - INFO - ====== WebDriver manager ======
+2025-01-21 10:22:53,150 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:22:53,230 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:22:53,280 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:22:54,394 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:25:56,360 - INFO - Inicializando bot---
+2025-01-21 10:25:56,364 - INFO - Abrindo site da OLX ---
+2025-01-21 10:25:56,366 - INFO - ====== WebDriver manager ======
+2025-01-21 10:25:56,497 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:25:56,559 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:25:56,608 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:25:57,836 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:28:05,103 - INFO - Inicializando bot---
+2025-01-21 10:28:05,106 - INFO - Abrindo site da OLX ---
+2025-01-21 10:28:05,107 - INFO - ====== WebDriver manager ======
+2025-01-21 10:28:05,232 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:28:05,313 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:28:05,363 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:28:06,414 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:34:37,122 - INFO - Inicializando bot---
+2025-01-21 10:34:37,125 - INFO - Abrindo site da OLX ---
+2025-01-21 10:34:37,128 - INFO - ====== WebDriver manager ======
+2025-01-21 10:34:37,267 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:34:37,332 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:34:37,384 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:34:38,504 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:36:20,892 - INFO - Inicializando bot---
+2025-01-21 10:36:20,894 - INFO - Abrindo site da OLX ---
+2025-01-21 10:36:20,896 - INFO - ====== WebDriver manager ======
+2025-01-21 10:36:21,037 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:36:21,108 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:36:21,166 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:36:22,187 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:38:21,179 - INFO - Inicializando bot---
+2025-01-21 10:38:21,182 - INFO - Abrindo site da OLX ---
+2025-01-21 10:38:21,185 - INFO - ====== WebDriver manager ======
+2025-01-21 10:38:21,378 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:38:21,439 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:38:21,491 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:38:22,593 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:39:55,958 - INFO - Inicializando bot---
+2025-01-21 10:39:55,960 - INFO - Abrindo site da OLX ---
+2025-01-21 10:39:55,962 - INFO - ====== WebDriver manager ======
+2025-01-21 10:39:56,092 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:39:56,152 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:39:56,202 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:39:57,307 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:42:53,070 - INFO - Inicializando bot---
+2025-01-21 10:42:53,072 - INFO - Abrindo site da OLX ---
+2025-01-21 10:42:53,074 - INFO - ====== WebDriver manager ======
+2025-01-21 10:42:53,205 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:42:53,290 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:42:53,341 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:42:54,386 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:46:26,868 - INFO - Inicializando bot---
+2025-01-21 10:46:26,870 - INFO - Abrindo site da OLX ---
+2025-01-21 10:46:26,871 - INFO - ====== WebDriver manager ======
+2025-01-21 10:46:26,999 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:46:27,061 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:46:27,107 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:46:28,303 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:48:03,559 - INFO - Inicializando bot---
+2025-01-21 10:48:03,561 - INFO - Abrindo site da OLX ---
+2025-01-21 10:48:03,563 - INFO - ====== WebDriver manager ======
+2025-01-21 10:48:03,692 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:48:03,753 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:48:03,814 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:48:04,927 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 10:48:18,795 - INFO - Inicializando bot---
+2025-01-21 10:48:18,797 - INFO - Abrindo site da OLX ---
+2025-01-21 10:48:18,799 - INFO - ====== WebDriver manager ======
+2025-01-21 10:48:18,949 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:48:19,017 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 10:48:19,067 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 10:48:20,108 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:03:47,354 - INFO - Inicializando bot---
+2025-01-21 11:03:47,357 - INFO - Abrindo site da OLX ---
+2025-01-21 11:03:47,359 - INFO - ====== WebDriver manager ======
+2025-01-21 11:03:47,485 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:03:47,544 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:03:47,604 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 11:03:48,670 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:04:06,016 - INFO - Procurando carros --
+2025-01-21 11:05:28,376 - INFO - Inicializando bot---
+2025-01-21 11:05:28,379 - INFO - Abrindo site da OLX ---
+2025-01-21 11:05:28,382 - INFO - ====== WebDriver manager ======
+2025-01-21 11:05:28,510 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:05:28,574 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:05:28,624 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 11:05:29,837 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:05:44,409 - INFO - Procurando carros --
+2025-01-21 11:09:25,774 - INFO - Inicializando bot---
+2025-01-21 11:09:25,776 - INFO - Abrindo site da OLX ---
+2025-01-21 11:09:25,777 - INFO - ====== WebDriver manager ======
+2025-01-21 11:09:25,909 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:09:25,977 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:09:26,027 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 11:09:27,132 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:09:42,121 - INFO - Procurando carros --
+2025-01-21 11:21:00,509 - INFO - Inicializando bot---
+2025-01-21 11:21:00,511 - INFO - Abrindo site da OLX ---
+2025-01-21 11:21:00,512 - INFO - ====== WebDriver manager ======
+2025-01-21 11:21:00,659 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:21:00,722 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:21:00,770 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 11:21:01,855 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:21:18,314 - INFO - Procurando carros ---
+2025-01-21 11:32:58,262 - INFO - Inicializando bot---
+2025-01-21 11:32:58,264 - INFO - Abrindo site da OLX ---
+2025-01-21 11:32:58,265 - INFO - ====== WebDriver manager ======
+2025-01-21 11:32:58,397 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:32:58,458 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:32:58,505 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 11:32:59,543 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:33:18,289 - INFO - Procurando carros ---
+2025-01-21 11:34:42,520 - INFO - Inicializando bot---
+2025-01-21 11:34:42,522 - INFO - Abrindo site da OLX ---
+2025-01-21 11:34:42,524 - INFO - ====== WebDriver manager ======
+2025-01-21 11:34:42,655 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:34:42,717 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:34:42,766 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 11:34:43,837 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:34:58,930 - INFO - Procurando carros ---
+2025-01-21 11:44:23,226 - INFO - Inicializando bot---
+2025-01-21 11:44:23,228 - INFO - Abrindo site da OLX ---
+2025-01-21 11:44:23,230 - INFO - ====== WebDriver manager ======
+2025-01-21 11:44:23,360 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:44:23,424 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:44:23,475 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 11:44:24,531 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:44:59,136 - INFO - Procurando carros ---
+2025-01-21 11:45:57,470 - INFO - Inicializando bot---
+2025-01-21 11:45:57,472 - INFO - Abrindo site da OLX ---
+2025-01-21 11:45:57,474 - INFO - ====== WebDriver manager ======
+2025-01-21 11:45:57,608 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:45:57,669 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:45:57,716 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 11:45:58,760 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:49:23,119 - INFO - Inicializando bot---
+2025-01-21 11:49:23,121 - INFO - Abrindo site da OLX ---
+2025-01-21 11:49:23,122 - INFO - ====== WebDriver manager ======
+2025-01-21 11:49:23,266 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:49:23,328 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:49:23,377 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 11:49:24,421 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:49:40,198 - INFO - Procurando carros ---
+2025-01-21 11:50:24,600 - INFO - Indo para segunda página ---
+2025-01-21 11:59:03,828 - INFO - Inicializando bot---
+2025-01-21 11:59:03,830 - INFO - Abrindo site da OLX ---
+2025-01-21 11:59:03,833 - INFO - ====== WebDriver manager ======
+2025-01-21 11:59:03,968 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:59:04,032 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 11:59:04,078 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 11:59:05,103 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 11:59:21,062 - INFO - Procurando carros ---
+2025-01-21 12:04:39,332 - INFO - Indo para segunda página ---
+2025-01-21 12:37:12,042 - INFO - Inicializando bot---
+2025-01-21 12:37:19,486 - INFO - Abrindo site da OLX ---
+2025-01-21 12:37:40,514 - INFO - ====== WebDriver manager ======
+2025-01-21 12:37:40,740 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 12:37:40,811 - INFO - Get LATEST chromedriver version for google-chrome
+2025-01-21 12:37:40,865 - INFO - Driver [/home/gabriel/.wdm/drivers/chromedriver/linux64/132.0.6834.83/chromedriver-linux64/chromedriver] found in cache
+2025-01-21 12:37:41,932 - INFO - patching driver executable /home/gabriel/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-01-21 12:38:03,596 - INFO - Procurando carros ---
+2025-01-21 12:38:26,544 - INFO - Indo para segunda página ---
