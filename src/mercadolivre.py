@@ -6,18 +6,18 @@ import traceback
 import logging
 from time import sleep
 import datetime
-import re
 import os
+import re
 
 data_atual = datetime.datetime.now().strftime('%Y-%m-%d')
 os.makedirs('logs', exist_ok=True)
 logging.basicConfig(level=logging.INFO, filename=f'logs/app_{data_atual}.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
 
-class Olx:
-
+class MercadoLivre():
+    
     def process_link(self, link):
         try:
-            logging.info('Abrindo site da OLX ---')
+            logging.info('Abrindo site do Mercado Livre ---')
             self.options = uc.ChromeOptions()
             self.options.add_argument("--start-maximized")
             self.options.add_argument("--disable-infobars")
@@ -27,69 +27,67 @@ class Olx:
             self.driver = uc.Chrome(service=service, options=self.options)  
             self.driver.get(link)
             sleep(2)
-            link_for_telegram = self.get_cars() 
-            return link_for_telegram
-                       
+            links_for_telegram = self.get_cars()
+            return links_for_telegram
+         
         except Exception as error:
             logging.error(f'Erro ao abrir site: {error}')
             logging.error('Traceback: %s', traceback.format_exc())
             raise Exception('Erro ao abrir site')
-        
+    
     def get_cars(self):
+        
         try:
-            with open('links/linksOlx.txt', "r", encoding="utf-8") as file:
-                links_existentes = {line.strip().rstrip(",") for line in file}
-            links_for_telegram = []
-            
-            for j in range(2):  
+            with open('links/linksML.txt', "r", encoding="utf-8") as file:
+                links_existentes = [line.strip().rstrip(",") for line in file]
+            links_for_telegram = []     
+        
+            for j in range(2):
                 logging.info('Procurando carros ---')
                 links = []
-                sleep(10)
-                cars = self.driver.find_elements(By.CSS_SELECTOR, '.olx-ad-card.olx-ad-card--horizontal.olx-ad-card--highlight')
-                for i in cars:
-                    link_element = i.find_element(By.CSS_SELECTOR, "a[data-ds-component='DS-NewAdCard-Link']")
+                li_list = self.driver.find_elements(By.CSS_SELECTOR, '.ui-search-layout__item')
+                sleep(2)
+                for li in li_list:
+                    link_element = li.find_element(By.CSS_SELECTOR, '.poly-component__title')
                     href = link_element.get_attribute("href")
-                    href_limpo = re.sub(r'[\?&]utm_[^=]+=[^&]+', '', href)
+                    href_limpo = re.sub(r'#.*', '', href)
                     links.append(href_limpo)
                     
-                with open("links/linksOlx.txt", "a", encoding="utf-8") as file:
+                
+                with open("links/linksML.txt", "a", encoding="utf-8") as file:
                     for link in links:
                         if link not in links_existentes:
                             file.write(link + ",\n")
                             links_for_telegram.append(link)
-                
+                            
                 if len(links_existentes) > 500:
                     links_existentes = links_existentes[-250:] 
-                    with open('links/linksOlx.txt', "w", encoding="utf-8") as file:
+                    with open('links/linksML.txt', "w", encoding="utf-8") as file:
                         for link in links_existentes:
                             file.write(link + ",\n")
                             
-                            
                 if j == 1: break
                 self.second_page()
-                sleep(5)
                 
+                #----------
+                sleep(5)
             return links_for_telegram
-            
+        
         except Exception as error:
-                logging.error(f'Erro ao tentar encontrar carros: {error}')
-                logging.error('Traceback: %s', traceback.format_exc())
-                raise Exception('Erro ao encontrar carros')
-            
-            
-    def second_page(self):
-        try:
-            logging.info('Indo para segunda página ---')
-            botao = self.driver.find_element(By.CSS_SELECTOR, '.sc-5ebad952-1.wskjO')    
-            self.driver.execute_script("arguments[0].scrollIntoView();", botao)
-            sleep(2)
-            botaos = self.driver.find_elements(By.CSS_SELECTOR, '.olx-core-button.olx-core-button--link.olx-core-button--small.sc-5ebad952-0.gVRVOX')
-            for b in botaos:
-                if b.text.strip() == '2':
-                    b.click()
-                    sleep(2)
-                    break
-        except Exception as error:
-            logging.error(f'Erro ao tentar encontrar botões: {error}')
+            logging.error(f'Erro ao tentar encontrar carros: {error}')
             logging.error('Traceback: %s', traceback.format_exc())
-            raise Exception('Erro ao encontrar botões')
+            raise Exception('Erro ao encontrar links')
+        
+        
+    def second_page(self):
+        logging.info('Abrindo segunda página ---')
+        sleep(2)
+        botao = self.driver.find_element(By.CSS_SELECTOR, '.andes-pagination.ui-search-andes-pagination.andes-pagination--large')                        
+        self.driver.execute_script("arguments[0].scrollIntoView();", botao)
+        sleep(2)
+        botaos = self.driver.find_elements(By.CSS_SELECTOR, '.andes-pagination__link')
+        for b in botaos:
+            if b.text.strip() == '2':
+                b.click()
+                sleep(2)
+                break

@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
+from src.mercadolivre import MercadoLivre
 from src.webmotors import Webmotors
 from src.telegram import Telegram
 from selenium import webdriver
@@ -35,6 +36,7 @@ class Main:
 
             self.olx = Olx()
             self.webmotors = Webmotors()
+            self.mercadolivre = MercadoLivre()
             # ... continuar para o restante dos sites
 
         except Exception as error:
@@ -51,11 +53,15 @@ class Main:
         #     pass
         # links = result['data']
         # site = 'OLX'
-        # link = 'https://www.olx.com.br/brasil?q=onix'
         
-        # self.olx.process_link(link)
-        pass
         
+        #link_olx = 'https://www.olx.com.br/brasil?q=onix'
+        # link_ml = 'https://lista.mercadolivre.com.br/veiculos/carros-caminhonetes/chevrolet/onix/#D[A:onix]'
+        
+        # links_for_telegram_ML = self.mercadolivre.process_link(link_ml)        
+        # links_for_telegram_OLX = self.olx.process_link(link_olx)
+
+
             
             
             
