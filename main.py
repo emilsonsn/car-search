@@ -55,11 +55,11 @@ class Main:
         # site = 'OLX'
         
         
-        #link_olx = 'https://www.olx.com.br/brasil?q=onix'
-        # link_ml = 'https://lista.mercadolivre.com.br/veiculos/carros-caminhonetes/chevrolet/onix/#D[A:onix]'
+        # link_olx = 'https://www.olx.com.br/brasil?q=onix'
+        link_ml = 'https://lista.mercadolivre.com.br/veiculos/carros-caminhonetes/chevrolet/onix/#D[A:onix]'
         
-        # links_for_telegram_ML = self.mercadolivre.process_link(link_ml)        
-        # links_for_telegram_OLX = self.olx.process_link(link_olx)
+        links_for_telegram_ML = self.mercadolivre.process_link(link_ml)        
+        # data_for_telegram_OLX = self.olx.process_link(link_olx)
 
 
             

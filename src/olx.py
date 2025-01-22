@@ -39,24 +39,25 @@ class Olx:
         try:
             with open('links/linksOlx.txt', "r", encoding="utf-8") as file:
                 links_existentes = {line.strip().rstrip(",") for line in file}
-            links_for_telegram = []
+            data_for_telegram = []
             
             for j in range(2):  
                 logging.info('Procurando carros ---')
-                links = []
                 sleep(10)
                 cars = self.driver.find_elements(By.CSS_SELECTOR, '.olx-ad-card.olx-ad-card--horizontal.olx-ad-card--highlight')
                 for i in cars:
                     link_element = i.find_element(By.CSS_SELECTOR, "a[data-ds-component='DS-NewAdCard-Link']")
+                    title_element = i.find_element(By.CSS_SELECTOR, 'h2.olx-ad-card__title--horizontal')
+                    value_element = i.find_element(By.CSS_SELECTOR, 'h3.olx-ad-card__price')
+                    value = value_element.text.strip()
+                    title = title_element.text.strip()
                     href = link_element.get_attribute("href")
                     href_limpo = re.sub(r'[\?&]utm_[^=]+=[^&]+', '', href)
-                    links.append(href_limpo)
-                    
-                with open("links/linksOlx.txt", "a", encoding="utf-8") as file:
-                    for link in links:
-                        if link not in links_existentes:
-                            file.write(link + ",\n")
-                            links_for_telegram.append(link)
+                    with open("links/linksOlx.txt", "a", encoding="utf-8") as file:
+                        if href_limpo not in links_existentes:
+                            file.write(href_limpo + ",\n")
+                            data_car = [title, value, href_limpo]
+                            data_for_telegram.append(data_car)
                 
                 if len(links_existentes) > 500:
                     links_existentes = links_existentes[-250:] 
@@ -69,7 +70,7 @@ class Olx:
                 self.second_page()
                 sleep(5)
                 
-            return links_for_telegram
+            return data_for_telegram
             
         except Exception as error:
                 logging.error(f'Erro ao tentar encontrar carros: {error}')

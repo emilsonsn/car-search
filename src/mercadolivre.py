@@ -40,25 +40,25 @@ class MercadoLivre():
         try:
             with open('links/linksML.txt', "r", encoding="utf-8") as file:
                 links_existentes = [line.strip().rstrip(",") for line in file]
-            links_for_telegram = []     
+            data_for_telegram = []     
         
             for j in range(2):
                 logging.info('Procurando carros ---')
-                links = []
                 li_list = self.driver.find_elements(By.CSS_SELECTOR, '.ui-search-layout__item')
                 sleep(2)
                 for li in li_list:
                     link_element = li.find_element(By.CSS_SELECTOR, '.poly-component__title')
+                    value_element = li.find_element(By.CSS_SELECTOR, '.andes-money-amount__fraction')
                     href = link_element.get_attribute("href")
+                    title = link_element.get_attribute("text")
+                    value = value_element.text.strip() 
                     href_limpo = re.sub(r'#.*', '', href)
-                    links.append(href_limpo)
                     
-                
-                with open("links/linksML.txt", "a", encoding="utf-8") as file:
-                    for link in links:
-                        if link not in links_existentes:
-                            file.write(link + ",\n")
-                            links_for_telegram.append(link)
+                    with open("links/linksML.txt", "a", encoding="utf-8") as file:
+                        if href_limpo not in links_existentes:
+                            file.write(href_limpo + ",\n")
+                            data_car = [title, value, href_limpo]
+                            data_for_telegram.append(data_car)
                             
                 if len(links_existentes) > 500:
                     links_existentes = links_existentes[-250:] 
@@ -71,7 +71,7 @@ class MercadoLivre():
                 
                 #----------
                 sleep(5)
-            return links_for_telegram
+            return data_for_telegram
         
         except Exception as error:
             logging.error(f'Erro ao tentar encontrar carros: {error}')
