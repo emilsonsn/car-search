@@ -40,7 +40,7 @@ class Olx:
     def get_cars(self):
         try:
             with open('links/linksOlx.txt', "r", encoding="utf-8") as file:
-                links_existentes = {line.strip().rstrip(",") for line in file}
+                links_existentes = [line.strip().rstrip(",") for line in file]
             data_for_telegram = []
             
             for j in range(2):  
