@@ -28,9 +28,9 @@ class MercadoLivre():
             self.driver = uc.Chrome(service=service, options=self.options)  
             self.driver.get(link)
             sleep(2)
-            links_for_telegram = self.get_cars()
+            data_for_telegram = self.get_cars()
             self.driver.quit()
-            return links_for_telegram
+            return data_for_telegram
          
         except Exception as error:
             logging.error(f'Erro ao abrir site: {error}')
@@ -43,7 +43,7 @@ class MercadoLivre():
                 links_existentes = [line.strip().rstrip(",") for line in file]
             data_for_telegram = []     
         
-            for j in range(2):
+            for page in range(2):
                 logging.info('Procurando carros ---')
                 li_list = self.driver.find_elements(By.CSS_SELECTOR, '.ui-search-layout__item')
                 sleep(2)
@@ -67,7 +67,7 @@ class MercadoLivre():
                         for link in links_existentes:
                             file.write(link + ",\n")
                             
-                if j == 1: break
+                if page == 1: break
                 self.second_page()
                                 
                 sleep(5)

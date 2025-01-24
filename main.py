@@ -102,6 +102,7 @@ class Main:
 
     def main(self):
         # self.olx.process_link(link)
+        self.webmotors.process_link('https://www.webmotors.com.br/carros/estoque/chevrolet/onix?estadocidade=estoque&marca1=CHEVROLET&modelo1=ONIX&autocomplete=onix')
 
         links = self.getLinks()
 

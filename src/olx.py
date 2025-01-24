@@ -43,14 +43,14 @@ class Olx:
                 links_existentes = [line.strip().rstrip(",") for line in file]
             data_for_telegram = []
             
-            for j in range(2):  
+            for page in range(2):  
                 logging.info('Procurando carros ---')
                 sleep(10)
                 cars = self.driver.find_elements(By.CSS_SELECTOR, '.olx-ad-card.olx-ad-card--horizontal.olx-ad-card--highlight')
-                for i in cars:
-                    link_element = i.find_element(By.CSS_SELECTOR, "a[data-ds-component='DS-NewAdCard-Link']")
-                    title_element = i.find_element(By.CSS_SELECTOR, 'h2.olx-ad-card__title--horizontal')
-                    value_element = i.find_element(By.CSS_SELECTOR, 'h3.olx-ad-card__price')
+                for car in cars:
+                    link_element = car.find_element(By.CSS_SELECTOR, "a[data-ds-component='DS-NewAdCard-Link']")
+                    title_element = car.find_element(By.CSS_SELECTOR, 'h2.olx-ad-card__title--horizontal')
+                    value_element = car.find_element(By.CSS_SELECTOR, 'h3.olx-ad-card__price')
                     value = value_element.text.strip()
                     title = title_element.text.strip()
                     href = link_element.get_attribute("href")
@@ -68,7 +68,7 @@ class Olx:
                             file.write(link + ",\n")
                             
                             
-                if j == 1: break
+                if page == 1: break
                 self.second_page()
                 sleep(5)
                 
