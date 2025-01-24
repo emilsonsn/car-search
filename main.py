@@ -9,6 +9,7 @@ import undetected_chromedriver as uc
 from src.mercadolivre import MercadoLivre
 from src.webmotors import Webmotors
 from src.telegram import TelegramBot
+from src.icarros import ICarros
 from selenium import webdriver
 from src.olx import Olx
 from time import sleep
@@ -35,7 +36,7 @@ class Main:
             self.olx = Olx()
             self.webmotors = Webmotors()
             self.mercadolivre = MercadoLivre()
-            # ... continuar para o restante dos sites
+            self.icarros = ICarros()
 
         except Exception as error:
             logging.error(f'Erro ao iniciar: {error}')
@@ -102,7 +103,6 @@ class Main:
 
     def main(self):
         # self.olx.process_link(link)
-        self.webmotors.process_link('https://www.webmotors.com.br/carros/estoque/chevrolet/onix?estadocidade=estoque&marca1=CHEVROLET&modelo1=ONIX&autocomplete=onix')
 
         links = self.getLinks()
 

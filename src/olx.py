@@ -28,9 +28,9 @@ class Olx:
             self.driver = uc.Chrome(service=service, options=self.options)  
             self.driver.get(link)
             sleep(2)
-            link_for_telegram = self.get_cars()
+            data_for_telegram = self.get_cars()
             self.driver.quit()
-            return link_for_telegram
+            return data_for_telegram
                        
         except Exception as error:
             logging.error(f'Erro ao abrir site: {error}')
