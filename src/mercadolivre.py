@@ -23,11 +23,13 @@ class MercadoLivre():
             self.options.add_argument("--disable-infobars")
             self.options.add_argument("--disable-extensions")
             self.options.add_argument("--no-sandbox")
+            self.options.add_argument("--headless") 
             service = ChromeService(ChromeDriverManager().install())
             self.driver = uc.Chrome(service=service, options=self.options)  
             self.driver.get(link)
             sleep(2)
             links_for_telegram = self.get_cars()
+            self.driver.quit()
             return links_for_telegram
          
         except Exception as error:
@@ -36,7 +38,6 @@ class MercadoLivre():
             raise Exception('Erro ao abrir site')
     
     def get_cars(self):
-        
         try:
             with open('links/linksML.txt', "r", encoding="utf-8") as file:
                 links_existentes = [line.strip().rstrip(",") for line in file]
@@ -68,8 +69,7 @@ class MercadoLivre():
                             
                 if j == 1: break
                 self.second_page()
-                
-                #----------
+                                
                 sleep(5)
             return data_for_telegram
         

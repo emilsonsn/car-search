@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 from src.mercadolivre import MercadoLivre
 from src.webmotors import Webmotors
-from src.telegram import Telegram
+from src.telegram import TelegramBot
 from selenium import webdriver
 from src.olx import Olx
 from time import sleep
@@ -25,14 +25,12 @@ logging.basicConfig(level=logging.INFO, filename=f'logs/app_{data_atual}.log', f
 
 
 class Main:
-
-
     def __init__(self):
         try:
             logging.info('Inicializando bot---')
-            config  = json.load(open('config.json'))
-            # self.telegram = Telegram()
-            # self.telegram.start(config['telegram_token'])
+            self.config = self.getConfigs()
+            self.telegram = TelegramBot()
+            self.telegram.start(self.config['telegram_token'])
 
             self.olx = Olx()
             self.webmotors = Webmotors()
@@ -44,6 +42,19 @@ class Main:
             logging.error('Traceback: %s', traceback.format_exc())
             raise Exception('Erro ao carregar dados')
     
+    def getConfigs(self):
+        # request.get('https://dominio.com.br/configs')
+        # result = json.loads(request)
+
+        # if not result['status']: 
+        #     # log de erro | parar o projeto
+        #     exit(1)
+        # return result['data']
+        return {
+            'telegram_token': '7870776836:AAHxEaY3qH_Wa3OevIUkJIn0Ha2JZb-kFlY'
+        }
+        pass
+    
     def getLinks(self):        
         # result = json.loads(request)
 
@@ -54,51 +65,61 @@ class Main:
         # links = result['data']
         # site = 'OLX'
         
-        
-        # link_olx = 'https://www.olx.com.br/brasil?q=onix'
-        link_ml = 'https://lista.mercadolivre.com.br/veiculos/carros-caminhonetes/chevrolet/onix/#D[A:onix]'
-        
-        links_for_telegram_ML = self.mercadolivre.process_link(link_ml)        
-        # data_for_telegram_OLX = self.olx.process_link(link_olx)
+        links = [
+            {
+                "site": 'mercadolivre',
+                "url": 'https://lista.mercadolivre.com.br/veiculos/carros-caminhonetes/chevrolet/onix/#D[A:onix]',
+                "groups": ['2452087430']
+            },
+            {
+                "site": "olx",
+                "url": 'https://www.olx.com.br/brasil?q=onix',
+                "groups": ['1111']
+            }                        
+        ]
 
+        return links
 
-            
-            
-        pass
-            
-            
+    def send_results_telegram(self, results, site, groups):
+        def format_message(batch):
+            message = f"🚗 *Novos anúncios em {site.upper()}* 🚗\n\n"
+            for i, result in enumerate(batch, start=1):
+                title = result[0]
+                value = result[1]
+                link = result[2]
+                message += (f"🔹 *{title}*\n"
+                            f"💰 *Preço:* {value}\n"
+                            f"🔗 [Ver anúncio]({link})\n"
+                            "-----------------------------\n")
+            return message
         
-        
-    
-    def send_results_telegram(self, results, groups):
-        for link in results:
-            
-            message = f"Montar mensagem usando {link}"
+        batch_size = 10
+        for i in range(0, len(results), batch_size):
+            batch = results[i:i + batch_size]
+            formatted_message = format_message(batch)            
+            self.telegram.send_message(formatted_message,groups)
+            sleep(1)
 
-            self.telegram.send_message(groups, message)
-
-    
     def main(self):
         # self.olx.process_link(link)
-        
-        
-        
-        
+
         links = self.getLinks()
 
         for link in links:
-            if link['site'] == 'olx':
-                results = self.olx.process_link(link)
-            elif link['site'] == 'webmotos':
-                results = self.webmotors.process_link(link)
-            # ... continuar para o restante dos sites
+            url = link['url']
+            site = link['site']
+            if site == 'olx':
+                results = self.olx.process_link(url)
+            elif site == 'webmotos':
+                results = self.webmotors.process_link(url)
+            elif site == 'mercadolivre':
+                results = self.mercadolivre.process_link(url)
+            else: return         
 
-            self.send_results_telegram(results, link['groups'])
+            if(len(results)): self.send_results_telegram(results, site, link['groups'])
         
         sleep(60)
             
 if __name__ == "__main__":
     main = Main()
     main.main()
-
-

@@ -23,11 +23,13 @@ class Olx:
             self.options.add_argument("--disable-infobars")
             self.options.add_argument("--disable-extensions")
             self.options.add_argument("--no-sandbox")
+            self.options.add_argument("--headless") 
             service = ChromeService(ChromeDriverManager().install())
             self.driver = uc.Chrome(service=service, options=self.options)  
             self.driver.get(link)
             sleep(2)
-            link_for_telegram = self.get_cars() 
+            link_for_telegram = self.get_cars()
+            self.driver.quit()
             return link_for_telegram
                        
         except Exception as error:
