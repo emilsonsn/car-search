@@ -77,35 +77,38 @@ class Main:
             sleep(1)
 
     def main(self):
-        while True:
-            links = self.getLinks()
+        url = ''
+        self.webmotors.process_link(url)
+        
+        # while True:
+        #     links = self.getLinks()
 
-            for link in links:
-                try:
-                    url = link['url']
-                    site = link['site']
-                    if site == 'olx':
-                        print('Iniciando olx')
-                        results = self.olx.process_link(url)
-                    elif site == 'webmotos':
-                        print('Iniciando webmotors')
-                        results = self.webmotors.process_link(url)
-                    elif site == 'mercadolivre':
-                        print('Iniciando mercadolivre')
-                        results = self.mercadolivre.process_link(url)
-                    elif site == 'icarros':
-                        print('Iniciando icarros')
-                        results = self.icarros.process_link(url)                
-                    else: return         
+        #     for link in links:
+        #         try:
+        #             url = link['url']
+        #             site = link['site']
+        #             if site == 'olx':
+        #                 print('Iniciando olx')
+        #                 results = self.olx.process_link(url)
+        #             elif site == 'webmotos':
+        #                 print('Iniciando webmotors')
+        #                 results = self.webmotors.process_link(url)
+        #             elif site == 'mercadolivre':
+        #                 print('Iniciando mercadolivre')
+        #                 results = self.mercadolivre.process_link(url)
+        #             elif site == 'icarros':
+        #                 print('Iniciando icarros')
+        #                 results = self.icarros.process_link(url)                
+        #             else: return         
     
-                    groups = json.loads(link['groups'])
+        #             groups = json.loads(link['groups'])
     
-                    if(len(results)):
-                        print('Iniciando disparo de mensagens no telegram')
-                        self.send_results_telegram(results, site, groups)
-                except: pass
+        #             if(len(results)):
+        #                 print('Iniciando disparo de mensagens no telegram')
+        #                 self.send_results_telegram(results, site, groups)
+        #         except: pass
             
-            sleep(60 * 2)
+        #     sleep(60 * 2)
             
 if __name__ == "__main__":
     main = Main()

@@ -1,6 +1,7 @@
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from selenium_stealth import stealth
 import undetected_chromedriver as uc
 import traceback
 import logging
@@ -16,6 +17,8 @@ class Webmotors:
 
     def process_link(self, link):
         try:
+            user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            PROXY = "52.67.10.183:80"
             logging.info('Abrindo site Webmotors ---')
             self.options = uc.ChromeOptions()
             self.options.add_argument("--disable-infobars")
@@ -23,7 +26,20 @@ class Webmotors:
             self.options.add_argument("--no-sandbox")
             self.options.add_argument("--disable-gpu")
             self.options.add_argument("--window-size=1920,1080")
+            self.options.add_argument(f"user-agent={user_agent}")
+            # self.options.add_argument(f"--proxy-server={PROXY}")
+            self.options.add_argument("--disable-webrtc")
             self.options.add_argument("--disable-blink-features=AutomationControlled")
+            
+            stealth(self.driver,
+                languages=["en-US", "en"],
+                vendor="Google Inc.",
+                platform="Win32",
+                webgl_vendor="Intel Inc.",
+                renderer="Intel Iris OpenGL Engine",
+                fix_hairline=True,
+            )
+            
 
             service = ChromeService(ChromeDriverManager().install())
             self.driver = uc.Chrome(service=service, options=self.options)  
