@@ -5,9 +5,9 @@ from datetime import datetime
 
 class TelegramBot:
     
-    def start(self, token):
-        self.token = token        
-        self.bot = telebot.TeleBot(self.token, parse_mode=None)        
+    def start(self):
+        self.token = "7870776836:AAHxEaY3qH_Wa3OevIUkJIn0Ha2JZb-kFlY"
+        self.bot = telebot.TeleBot(self.token, parse_mode=None)
 
     def send_message(self, mensagem, grupos):
         for g, grupo in enumerate(grupos):

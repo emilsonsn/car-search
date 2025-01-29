@@ -6,7 +6,6 @@ import traceback
 import logging
 from time import sleep
 import datetime
-import re
 import os
 
 data_atual = datetime.datetime.now().strftime('%Y-%m-%d')
@@ -19,23 +18,26 @@ class Webmotors:
         try:
             logging.info('Abrindo site Webmotors ---')
             self.options = uc.ChromeOptions()
-            self.options.add_argument("--start-maximized")
             self.options.add_argument("--disable-infobars")
             self.options.add_argument("--disable-extensions")
             self.options.add_argument("--no-sandbox")
-            self.options.add_argument("--headless") 
+            self.options.add_argument("--disable-gpu")
+            self.options.add_argument("--window-size=1920,1080")
+            self.options.add_argument("--disable-blink-features=AutomationControlled")
+
             service = ChromeService(ChromeDriverManager().install())
             self.driver = uc.Chrome(service=service, options=self.options)  
             self.driver.get(link)
-            sleep(2)
+            sleep(10)
             data_for_telegram = self.get_cars()
-            self.driver.quit()
+            try: self.driver.quit()
+            except: pass
             return data_for_telegram
         
         except Exception as error:
             logging.error(f'Erro ao abrir site: {error}')
             logging.error('Traceback: %s', traceback.format_exc())
-            raise Exception('Erro ao abrir site')
+            raise Exception(f"Erro ao abrir site {error}")
         
     def get_cars(self):
         try:
@@ -68,13 +70,10 @@ class Webmotors:
                     for link in links_existentes:
                         file.write(link + ",\n")
                  
-            
             return data_for_telegram
                            
-                    
         except Exception as error:
                 logging.error(f'Erro ao tentar encontrar carros: {error}')
                 logging.error('Traceback: %s', traceback.format_exc())
+                self.driver.quit()
                 raise Exception('Erro ao encontrar carros')
-
-   

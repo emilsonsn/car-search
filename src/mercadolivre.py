@@ -14,12 +14,10 @@ os.makedirs('logs', exist_ok=True)
 logging.basicConfig(level=logging.INFO, filename=f'logs/app_{data_atual}.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
 
 class MercadoLivre():
-    
     def process_link(self, link):
         try:
             logging.info('Abrindo site do Mercado Livre ---')
             self.options = uc.ChromeOptions()
-            self.options.add_argument("--start-maximized")
             self.options.add_argument("--disable-infobars")
             self.options.add_argument("--disable-extensions")
             self.options.add_argument("--no-sandbox")
@@ -27,9 +25,10 @@ class MercadoLivre():
             service = ChromeService(ChromeDriverManager().install())
             self.driver = uc.Chrome(service=service, options=self.options)  
             self.driver.get(link)
-            sleep(2)
+            sleep(10)
             data_for_telegram = self.get_cars()
-            self.driver.quit()
+            try: self.driver.quit()
+            except: pass
             return data_for_telegram
          
         except Exception as error:
@@ -45,8 +44,8 @@ class MercadoLivre():
         
             for page in range(2):
                 logging.info('Procurando carros ---')
+                sleep(10)
                 li_list = self.driver.find_elements(By.CSS_SELECTOR, '.ui-search-layout__item')
-                sleep(2)
                 for li in li_list:
                     link_element = li.find_element(By.CSS_SELECTOR, '.poly-component__title')
                     value_element = li.find_element(By.CSS_SELECTOR, '.andes-money-amount__fraction')
@@ -76,18 +75,18 @@ class MercadoLivre():
         except Exception as error:
             logging.error(f'Erro ao tentar encontrar carros: {error}')
             logging.error('Traceback: %s', traceback.format_exc())
+            self.driver.quit()
             raise Exception('Erro ao encontrar links')
-        
         
     def second_page(self):
         logging.info('Abrindo segunda página ---')
         sleep(2)
         botao = self.driver.find_element(By.CSS_SELECTOR, '.andes-pagination.ui-search-andes-pagination.andes-pagination--large')                        
         self.driver.execute_script("arguments[0].scrollIntoView();", botao)
-        sleep(2)
+        sleep(5)
         botaos = self.driver.find_elements(By.CSS_SELECTOR, '.andes-pagination__link')
         for b in botaos:
             if b.text.strip() == '2':
                 b.click()
-                sleep(2)
+                sleep(10)
                 break

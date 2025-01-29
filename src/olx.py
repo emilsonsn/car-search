@@ -14,22 +14,21 @@ os.makedirs('logs', exist_ok=True)
 logging.basicConfig(level=logging.INFO, filename=f'logs/app_{data_atual}.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
 
 class Olx:
-
     def process_link(self, link):
         try:
             logging.info('Abrindo site da OLX ---')
             self.options = uc.ChromeOptions()
-            self.options.add_argument("--start-maximized")
             self.options.add_argument("--disable-infobars")
             self.options.add_argument("--disable-extensions")
             self.options.add_argument("--no-sandbox")
-            self.options.add_argument("--headless") 
+            #self.options.add_argument("--headless") 
             service = ChromeService(ChromeDriverManager().install())
             self.driver = uc.Chrome(service=service, options=self.options)  
             self.driver.get(link)
-            sleep(2)
+            sleep(10)
             data_for_telegram = self.get_cars()
-            self.driver.quit()
+            try: self.driver.quit()
+            except: pass
             return data_for_telegram
                        
         except Exception as error:
@@ -46,10 +45,10 @@ class Olx:
             for page in range(2):  
                 logging.info('Procurando carros ---')
                 sleep(10)
-                cars = self.driver.find_elements(By.CSS_SELECTOR, '.olx-ad-card.olx-ad-card--horizontal.olx-ad-card--highlight')
+                cars = self.driver.find_elements(By.CSS_SELECTOR, 'section[data-ds-component="DS-AdCard"]')
                 for car in cars:
                     link_element = car.find_element(By.CSS_SELECTOR, "a[data-ds-component='DS-NewAdCard-Link']")
-                    title_element = car.find_element(By.CSS_SELECTOR, 'h2.olx-ad-card__title--horizontal')
+                    title_element = car.find_element(By.CSS_SELECTOR, 'h2')
                     value_element = car.find_element(By.CSS_SELECTOR, 'h3.olx-ad-card__price')
                     value = value_element.text.strip()
                     title = title_element.text.strip()
@@ -67,7 +66,6 @@ class Olx:
                         for link in links_existentes:
                             file.write(link + ",\n")
                             
-                            
                 if page == 1: break
                 self.second_page()
                 sleep(5)
@@ -77,20 +75,20 @@ class Olx:
         except Exception as error:
                 logging.error(f'Erro ao tentar encontrar carros: {error}')
                 logging.error('Traceback: %s', traceback.format_exc())
+                self.driver.quit()
                 raise Exception('Erro ao encontrar carros')
-            
             
     def second_page(self):
         try:
             logging.info('Indo para segunda página ---')
             botao = self.driver.find_element(By.CSS_SELECTOR, '.sc-5ebad952-1.wskjO')    
             self.driver.execute_script("arguments[0].scrollIntoView();", botao)
-            sleep(2)
+            sleep(5)
             botaos = self.driver.find_elements(By.CSS_SELECTOR, '.olx-core-button.olx-core-button--link.olx-core-button--small.sc-5ebad952-0.gVRVOX')
             for b in botaos:
                 if b.text.strip() == '2':
                     b.click()
-                    sleep(2)
+                    sleep(10)
                     break
         except Exception as error:
             logging.error(f'Erro ao tentar encontrar botões: {error}')

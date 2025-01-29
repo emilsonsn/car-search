@@ -19,7 +19,6 @@ class ICarros:
         try:
             logging.info('Abrindo site da ICarros ---')
             self.options = uc.ChromeOptions()
-            self.options.add_argument("--start-maximized")
             self.options.add_argument("--disable-infobars")
             self.options.add_argument("--disable-extensions")
             self.options.add_argument("--no-sandbox")
@@ -27,16 +26,16 @@ class ICarros:
             service = ChromeService(ChromeDriverManager().install())
             self.driver = uc.Chrome(service=service, options=self.options)  
             self.driver.get(link)
-            sleep(2)
+            sleep(10)
             data_for_telegram = self.get_cars()
-            self.driver.quit()
+            try: self.driver.quit()
+            except: pass
             return data_for_telegram
         
         except Exception as error:
             logging.error(f'Erro ao abrir site: {error}')
             logging.error('Traceback: %s', traceback.format_exc())
             raise Exception('Erro ao abrir site')
-        
 
     def get_cars(self):
         try:
@@ -73,16 +72,10 @@ class ICarros:
                     for link in links_existentes:
                         file.write(link + ",\n")
                             
-                            
             return data_for_telegram
                         
-                            
-                            
-                
         except Exception as error:
             logging.error(f'Erro ao buscar carros: {error}')
             logging.error('Traceback: %s', traceback.format_exc())
+            self.driver.quit()
             raise Exception('Erro ao buscar carros')
-        
-    
-    

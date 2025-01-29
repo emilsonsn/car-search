@@ -24,60 +24,35 @@ data_atual = datetime.datetime.now().strftime('%Y-%m-%d')
 os.makedirs('logs', exist_ok=True)
 logging.basicConfig(level=logging.INFO, filename=f'logs/app_{data_atual}.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
 
-
 class Main:
     def __init__(self):
         try:
             logging.info('Inicializando bot---')
-            self.config = self.getConfigs()
             self.telegram = TelegramBot()
-            self.telegram.start(self.config['telegram_token'])
+            self.telegram.start()
 
             self.olx = Olx()
             self.webmotors = Webmotors()
             self.mercadolivre = MercadoLivre()
             self.icarros = ICarros()
+            self.api_url = 'https://roccoveiculos.online/api'
 
         except Exception as error:
             logging.error(f'Erro ao iniciar: {error}')
             logging.error('Traceback: %s', traceback.format_exc())
             raise Exception('Erro ao carregar dados')
     
-    def getConfigs(self):
-        # request.get('https://dominio.com.br/configs')
-        # result = json.loads(request)
+    def getLinks(self):     
+        print('Buscando links...')
+        response = requests.get(f"{self.api_url}/links")
+        result = response.json() 
 
-        # if not result['status']: 
-        #     # log de erro | parar o projeto
-        #     exit(1)
-        # return result['data']
-        return {
-            'telegram_token': '7870776836:AAHxEaY3qH_Wa3OevIUkJIn0Ha2JZb-kFlY'
-        }
-        pass
-    
-    def getLinks(self):        
-        # result = json.loads(request)
+        if not result['status']: 
+            exit(1)
+            pass
+        links = result['data']
 
-        # if not result['status']: 
-        #     # log de erro | parar o projeto
-        #     exit(1)
-        #     pass
-        # links = result['data']
-        # site = 'OLX'
-        
-        links = [
-            {
-                "site": 'mercadolivre',
-                "url": 'https://lista.mercadolivre.com.br/veiculos/carros-caminhonetes/chevrolet/onix/#D[A:onix]',
-                "groups": ['2452087430']
-            },
-            {
-                "site": "olx",
-                "url": 'https://www.olx.com.br/brasil?q=onix',
-                "groups": ['1111']
-            }                        
-        ]
+        print(f"Links achados: {len(links)}")
 
         return links
 
@@ -102,24 +77,35 @@ class Main:
             sleep(1)
 
     def main(self):
-        # self.olx.process_link(link)
+        while True:
+            links = self.getLinks()
 
-        links = self.getLinks()
-
-        for link in links:
-            url = link['url']
-            site = link['site']
-            if site == 'olx':
-                results = self.olx.process_link(url)
-            elif site == 'webmotos':
-                results = self.webmotors.process_link(url)
-            elif site == 'mercadolivre':
-                results = self.mercadolivre.process_link(url)
-            else: return         
-
-            if(len(results)): self.send_results_telegram(results, site, link['groups'])
-        
-        sleep(60)
+            for link in links:
+                try:
+                    url = link['url']
+                    site = link['site']
+                    if site == 'olx':
+                        print('Iniciando olx')
+                        results = self.olx.process_link(url)
+                    elif site == 'webmotos':
+                        print('Iniciando webmotors')
+                        results = self.webmotors.process_link(url)
+                    elif site == 'mercadolivre':
+                        print('Iniciando mercadolivre')
+                        results = self.mercadolivre.process_link(url)
+                    elif site == 'icarros':
+                        print('Iniciando icarros')
+                        results = self.icarros.process_link(url)                
+                    else: return         
+    
+                    groups = json.loads(link['groups'])
+    
+                    if(len(results)):
+                        print('Iniciando disparo de mensagens no telegram')
+                        self.send_results_telegram(results, site, groups)
+                except: pass
+            
+            sleep(60 * 2)
             
 if __name__ == "__main__":
     main = Main()
