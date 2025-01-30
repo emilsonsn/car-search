@@ -49,6 +49,9 @@ class MercadoLivre():
                 for li in li_list:
                     link_element = li.find_element(By.CSS_SELECTOR, '.poly-component__title')
                     value_element = li.find_element(By.CSS_SELECTOR, '.andes-money-amount__fraction')
+                    km_year = li.find_elements(By.CSS_SELECTOR, '.poly-attributes-list__item.poly-attributes-list__separator')
+                    year = km_year[0].text
+                    km = km_year[1].text
                     href = link_element.get_attribute("href")
                     title = link_element.get_attribute("text")
                     value = value_element.text.strip() 
@@ -57,10 +60,10 @@ class MercadoLivre():
                     with open("links/linksML.txt", "a", encoding="utf-8") as file:
                         if href_limpo not in links_existentes:
                             file.write(href_limpo + ",\n")
-                            data_car = [title, value, href_limpo]
+                            data_car = [title, value, href_limpo, km, year]
                             data_for_telegram.append(data_car)
                             
-                if len(links_existentes) > 500:
+                if len(links_existentes) > 2000:
                     links_existentes = links_existentes[-250:] 
                     with open('links/linksML.txt', "w", encoding="utf-8") as file:
                         for link in links_existentes:

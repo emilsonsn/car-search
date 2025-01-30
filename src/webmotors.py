@@ -62,12 +62,17 @@ class Webmotors:
             
             logging.info('Procurando carros ---')
             sleep(10)
+            self.scrolar()
             cars = self.driver.find_elements(By.CSS_SELECTOR, '.sc-laTMn.hebMcT')
             for car in cars:
                 link_element = car.find_element(By.CSS_SELECTOR, '.sc-kIPQKe.sc-eXEjpC.gXNwLQ')
                 title_element = car.find_element(By.CSS_SELECTOR, '.sc-hqyNC.Vropq')
                 subtitle_element = car.find_element(By.CSS_SELECTOR, '.sc-jbKcbu.fQZoiO')
                 value_element = car.find_element(By.CSS_SELECTOR, '.sc-cJSrbW.ewMDbD')
+                km_year = car.find_elements(By.CSS_SELECTOR, '.sc-cHGsZl.goowTJ')
+                year = km_year[0].text.strip()
+                km = km_year[1].text.strip()
+
                 href = link_element.get_attribute("href")
                 title = title_element.text.strip()
                 subtitle = subtitle_element.text.strip()
@@ -76,10 +81,10 @@ class Webmotors:
                 with open("links/linksWebmotors.txt", "a", encoding="utf-8") as file:
                     if href not in links_existentes:
                         file.write(href + ",\n")
-                        data_car = [title, value, href]
+                        data_car = [title, value, href, km, year]
                         data_for_telegram.append(data_car)
                         
-            if len(links_existentes) > 500:
+            if len(links_existentes) > 2000:
                 links_existentes = links_existentes[-250:] 
                 with open('links/linksWebmotors.txt', "w", encoding="utf-8") as file:
                     for link in links_existentes:
@@ -92,3 +97,13 @@ class Webmotors:
                 logging.error('Traceback: %s', traceback.format_exc())
                 self.driver.quit()
                 raise Exception('Erro ao encontrar carros')
+            
+    def scrolar(self):
+        logging.info('Rolando para baixo ---')
+        for _ in range(3):
+            try:                
+                self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
+                sleep(10)
+            except Exception as error:
+                logging.error(f'Erro ao tentar rolar: {error}')
+                logging.error('Traceback: %s', traceback.format_exc())

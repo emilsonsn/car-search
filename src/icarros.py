@@ -54,6 +54,12 @@ class ICarros:
                 subtitle_element = div_title.find_element(By.CSS_SELECTOR, '.label__neutral.ids_textStyle_label_xsmall_regular')
                 div_value = car.find_element(By.CSS_SELECTOR, '.offer-card__price-container')
                 value_element = div_value.find_element(By.CSS_SELECTOR, '.label__onLight.ids_textStyle_label_medium_bold')
+                div_info = car.find_element(By.CSS_SELECTOR, '.offer-card__info')
+                km_year = div_info.find_element(By.CSS_SELECTOR, '.info-container__car-info')
+                km_year = km_year.text.split('\n')
+                
+                year = km_year[0].strip()
+                km = km_year[1].strip()
                 href = link_element.get_attribute('href')
                 href = re.sub(r'\?(pos=\d+&?|hfv=\w+&?|financiamento=\w+&?)*$', '', href)
                 title = title_element.text.strip()
@@ -63,10 +69,10 @@ class ICarros:
                 with open("links/linksIcarros.txt", "a", encoding="utf-8") as file:
                     if href not in links_existentes:
                         file.write(href + ",\n")
-                        data_car = [title, value, href]
+                        data_car = [title, value, href, km, year]
                         data_for_telegram.append(data_car)
                 
-            if len(links_existentes) > 500:
+            if len(links_existentes) > 2000:
                 links_existentes = links_existentes[-250:] 
                 with open('links/linksIcarros.txt', "w", encoding="utf-8") as file:
                     for link in links_existentes:

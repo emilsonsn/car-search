@@ -52,6 +52,8 @@ class Olx:
                     link_element = car.find_element(By.CSS_SELECTOR, "a[data-ds-component='DS-NewAdCard-Link']")
                     title_element = car.find_element(By.CSS_SELECTOR, 'h2')
                     value_element = car.find_element(By.CSS_SELECTOR, 'h3.olx-ad-card__price')
+                    km = car.find_elements(By.CSS_SELECTOR, '.olx-ad-card__labels-item')
+                    km = km[0].text.strip()
                     value = value_element.text.strip()
                     title = title_element.text.strip()
                     href = link_element.get_attribute("href")
@@ -59,10 +61,10 @@ class Olx:
                     with open("links/linksOlx.txt", "a", encoding="utf-8") as file:
                         if href_limpo not in links_existentes:
                             file.write(href_limpo + ",\n")
-                            data_car = [title, value, href_limpo]
+                            data_car = [title, value, href_limpo, km]
                             data_for_telegram.append(data_car)
                 
-                if len(links_existentes) > 500:
+                if len(links_existentes) > 2000:
                     links_existentes = links_existentes[-250:] 
                     with open('links/linksOlx.txt', "w", encoding="utf-8") as file:
                         for link in links_existentes:

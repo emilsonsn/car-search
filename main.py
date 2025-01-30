@@ -50,13 +50,20 @@ class Main:
 
     def send_results_telegram(self, results, site, groups):
         def format_message(batch):
+            
             message = f"🚗 *Novos anúncios em {site.upper()}* 🚗\n\n"
             for i, result in enumerate(batch, start=1):
                 title = result[0]
                 value = result[1]
                 link = result[2]
+                km = result[3]
+                try: year = result[4]
+                except IndexError:
+                    year = '------'
                 message += (f"🔹 *{title}*\n"
                             f"💰 *Preço:* {value}\n"
+                            f"🚗 *Km:* {km}\n"
+                            f"📅 *Ano:* {year}"
                             f"🔗 [Ver anúncio]({link})\n"
                             "-----------------------------\n")
             return message
@@ -80,33 +87,38 @@ class Main:
 
     def main(self):
         while True:
-            links = self.getLinks()
+            # links = self.getLinks()
 
-            for link in links:
-                self.close_chrome()
-                try:
-                    url = link['url']
-                    site = link['site']
-                    if site == 'olx':
-                        print('Iniciando olx')
-                        results = self.olx.process_link(url)
-                    elif site == 'webmotos':
-                        print('Iniciando webmotors')
-                        results = self.webmotors.process_link(url)
-                    elif site == 'mercadolivre':
-                        print('Iniciando mercadolivre')
-                        results = self.mercadolivre.process_link(url)
-                    elif site == 'icarros':
-                        print('Iniciando icarros')
-                        results = self.icarros.process_link(url)                
-                    else: return         
+            # for link in links:
+            #     self.close_chrome()
+            #     try:
+            #         url = link['url']
+            #         site = link['site']
+            #         if site == 'olx':
+            #             print('Iniciando olx')
+            #             results = self.olx.process_link(url)
+            #         elif site == 'webmotos':
+            #             print('Iniciando webmotors')
+            #             results = self.webmotors.process_link(url)
+            #         elif site == 'mercadolivre':
+            #             print('Iniciando mercadolivre')
+            #             results = self.mercadolivre.process_link(url)
+            #         elif site == 'icarros':
+            #             print('Iniciando icarros')
+            #             results = self.icarros.process_link(url)                
+            #         else: return         
     
-                    groups = json.loads(link['groups'])
+            #         groups = json.loads(link['groups'])
     
-                    if(len(results)):
-                        print('Iniciando disparo de mensagens no telegram')
-                        self.send_results_telegram(results, site, groups)
-                except: pass
+            #         if(len(results)):
+            #             print('Iniciando disparo de mensagens no telegram')
+            #             self.send_results_telegram(results, site, groups)
+            #     except: pass
+            
+            link = 'https://www.icarros.com.br/ache/listaanuncios.jsp?modelospellchecker=Chevrolet+-+Onix&modeloaberto=Chevrolet+-+Onix&_gl=1*1yx5f5p*_up*MQ..*_gs*MQ..&gclid=Cj0KCQiA4-y8BhC3ARIsAHmjC_G1BeFZrujVkszHNZddct3AIoaq2xZFznx8I2XK6mf25bXunvk1dS4aAhlxEALw_wcB'
+            self.icarros.process_link(link)
+            
+            
             
             sleep(60 * 5)
             
