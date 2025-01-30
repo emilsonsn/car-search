@@ -1,13 +1,15 @@
-from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium_stealth import stealth
-import undetected_chromedriver as uc
+from selenium import webdriver
 import traceback
 import logging
 from time import sleep
 import datetime
 import os
+import subprocess
+import platform
 
 data_atual = datetime.datetime.now().strftime('%Y-%m-%d')
 os.makedirs('logs', exist_ok=True)
@@ -17,32 +19,29 @@ class Webmotors:
 
     def process_link(self, link):
         try:
-            user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-            PROXY = "52.67.10.183:80"
-            logging.info('Abrindo site Webmotors ---')
-            self.options = uc.ChromeOptions()
-            self.options.add_argument("--disable-infobars")
+            system = platform.system()
+            
+            if system == "Windows":
+                subprocess.Popen(
+                    f'"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" --log-level=3 --remote-debugging-port=9222', shell=True)
+            elif system == "Linux":
+                subprocess.Popen(
+                    f'/usr/bin/google-chrome --log-level=3 --remote-debugging-port=9222', shell=True)
+            
+            sleep(1)
+            service = Service()
+            self.options = webdriver.ChromeOptions()
+            self.options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
+            self.options.add_argument("--start-maximized")
+            self.options.add_argument("disable-infobars")
             self.options.add_argument("--disable-extensions")
             self.options.add_argument("--no-sandbox")
-            self.options.add_argument("--disable-gpu")
-            self.options.add_argument("--window-size=1920,1080")
-            self.options.add_argument(f"user-agent={user_agent}")
-            # self.options.add_argument(f"--proxy-server={PROXY}")
-            self.options.add_argument("--disable-webrtc")
-            self.options.add_argument("--disable-blink-features=AutomationControlled")
-            
-            stealth(self.driver,
-                languages=["en-US", "en"],
-                vendor="Google Inc.",
-                platform="Win32",
-                webgl_vendor="Intel Inc.",
-                renderer="Intel Iris OpenGL Engine",
-                fix_hairline=True,
-            )
-            
 
-            service = ChromeService(ChromeDriverManager().install())
-            self.driver = uc.Chrome(service=service, options=self.options)  
+            if system == "Windows":
+                self.driver = webdriver.Chrome(service=service, options=self.options)
+            elif system == "Linux":
+                self.driver = webdriver.Chrome(service=service, options=self.options)
+            
             self.driver.get(link)
             sleep(10)
             data_for_telegram = self.get_cars()

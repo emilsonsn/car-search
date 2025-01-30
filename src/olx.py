@@ -27,7 +27,9 @@ class Olx:
             self.driver.get(link)
             sleep(10)
             data_for_telegram = self.get_cars()
-            try: self.driver.quit()
+            try:
+                sleep(1)
+                self.driver.quit()
             except: pass
             return data_for_telegram
                        

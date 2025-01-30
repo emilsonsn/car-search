@@ -1,16 +1,7 @@
-from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
-import undetected_chromedriver as uc
 from src.mercadolivre import MercadoLivre
 from src.webmotors import Webmotors
 from src.telegram import TelegramBot
 from src.icarros import ICarros
-from selenium import webdriver
 from src.olx import Olx
 from time import sleep
 import traceback
@@ -19,6 +10,7 @@ import datetime
 import logging
 import json
 import os
+import platform
 
 data_atual = datetime.datetime.now().strftime('%Y-%m-%d')
 os.makedirs('logs', exist_ok=True)
@@ -76,11 +68,22 @@ class Main:
             self.telegram.send_message(formatted_message,groups)
             sleep(1)
 
+    def close_chrome(self):
+        system = platform.system()
+        try:
+            if system == "Windows":
+                os.system("taskkill /F /IM chrome.exe")
+            elif system == "Linux":
+                os.system("pkill chrome")
+        except Exception as e:
+            print(f"Erro ao tentar fechar o Chrome: {e}")
+
     def main(self):
         while True:
             links = self.getLinks()
 
             for link in links:
+                self.close_chrome()
                 try:
                     url = link['url']
                     site = link['site']
@@ -105,7 +108,7 @@ class Main:
                         self.send_results_telegram(results, site, groups)
                 except: pass
             
-            sleep(60 * 2)
+            sleep(60 * 5)
             
 if __name__ == "__main__":
     main = Main()
