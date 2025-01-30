@@ -85,10 +85,9 @@ class Webmotors:
                         data_for_telegram.append(data_car)
                         
             if len(links_existentes) > 2000:
-                links_existentes = links_existentes[-250:] 
+                links_existentes = links_existentes[-2000:]
                 with open('links/linksWebmotors.txt', "w", encoding="utf-8") as file:
-                    for link in links_existentes:
-                        file.write(link + ",\n")
+                    file.write("\n".join(links_existentes) + ",\n")
                  
             return data_for_telegram
                            
