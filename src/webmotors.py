@@ -13,7 +13,14 @@ import platform
 
 data_atual = datetime.datetime.now().strftime('%Y-%m-%d')
 os.makedirs('logs', exist_ok=True)
-logging.basicConfig(level=logging.INFO, filename=f'logs/app_{data_atual}.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(f'logs/app_{data_atual}.log', mode='a'),
+        logging.StreamHandler()  # Adiciona saída para o console
+    ]
+)
 
 class Webmotors:
 
@@ -31,11 +38,7 @@ class Webmotors:
             sleep(1)
             service = Service()
             self.options = webdriver.ChromeOptions()
-            self.options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
-            self.options.add_argument("--start-maximized")
-            self.options.add_argument("disable-infobars")
-            self.options.add_argument("--disable-extensions")
-            self.options.add_argument("--no-sandbox")
+            self.options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")         
 
             if system == "Windows":
                 self.driver = webdriver.Chrome(service=service, options=self.options)
@@ -98,7 +101,7 @@ class Webmotors:
                 raise Exception('Erro ao encontrar carros')
             
     def scrolar(self):
-        logging.info('Rolando para baixo ---')
+        logging.info('Rolando para baixo ---')        
         for _ in range(3):
             try:                
                 self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')

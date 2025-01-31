@@ -14,7 +14,14 @@ import platform
 
 data_atual = datetime.datetime.now().strftime('%Y-%m-%d')
 os.makedirs('logs', exist_ok=True)
-logging.basicConfig(level=logging.INFO, filename=f'logs/app_{data_atual}.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(f'logs/app_{data_atual}.log', mode='a'),
+        logging.StreamHandler()  # Adiciona saída para o console
+    ]
+)
 
 class Main:
     def __init__(self):
@@ -63,7 +70,7 @@ class Main:
                 message += (f"🔹 *{title}*\n"
                             f"💰 *Preço:* {value}\n"
                             f"🚗 *Km:* {km}\n"
-                            f"📅 *Ano:* {year}"
+                            f"📅 *Ano:* {year}\n"
                             f"🔗 [Ver anúncio]({link})\n"
                             "-----------------------------\n")
             return message
@@ -87,39 +94,35 @@ class Main:
 
     def main(self):
         while True:
-            # links = self.getLinks()
-
-            # for link in links:
-            #     self.close_chrome()
-            #     try:
-            #         url = link['url']
-            #         site = link['site']
-            #         if site == 'olx':
-            #             print('Iniciando olx')
-            #             results = self.olx.process_link(url)
-            #         elif site == 'webmotos':
-            #             print('Iniciando webmotors')
-            #             results = self.webmotors.process_link(url)
-            #         elif site == 'mercadolivre':
-            #             print('Iniciando mercadolivre')
-            #             results = self.mercadolivre.process_link(url)
-            #         elif site == 'icarros':
-            #             print('Iniciando icarros')
-            #             results = self.icarros.process_link(url)                
-            #         else: return         
+            links = self.getLinks()
+            for link in links:
+                self.close_chrome()
+                sleep(15)
+                try:
+                    url = link['url']
+                    site = link['site']
+                    if site == 'olx':
+                        print('Iniciando olx')
+                        results = self.olx.process_link(url)
+                    elif site == 'webmotos':
+                        print('Iniciando webmotors')
+                        results = self.webmotors.process_link(url)
+                    elif site == 'mercadolivre':
+                        print('Iniciando mercadolivre')
+                        results = self.mercadolivre.process_link(url)
+                    elif site == 'icarros':
+                        print('Iniciando icarros')
+                        results = self.icarros.process_link(url)                
+                    else: return         
     
-            #         groups = json.loads(link['groups'])
+                    groups = json.loads(link['groups'])
     
-            #         if(len(results)):
-            #             print('Iniciando disparo de mensagens no telegram')
-            #             self.send_results_telegram(results, site, groups)
-            #     except: pass
-            
-            link = 'https://www.icarros.com.br/ache/listaanuncios.jsp?modelospellchecker=Chevrolet+-+Onix&modeloaberto=Chevrolet+-+Onix&_gl=1*1yx5f5p*_up*MQ..*_gs*MQ..&gclid=Cj0KCQiA4-y8BhC3ARIsAHmjC_G1BeFZrujVkszHNZddct3AIoaq2xZFznx8I2XK6mf25bXunvk1dS4aAhlxEALw_wcB'
-            self.icarros.process_link(link)
-            
-            
-            
+                    if(len(results)):
+                        print('Iniciando disparo de mensagens no telegram')
+                        self.send_results_telegram(results, site, groups)                                
+                except Exception as e:
+                    logging.info(f'erro {e}')                    
+            logging.info('Esperando 5 minutos ---')
             sleep(60 * 5)
             
 if __name__ == "__main__":

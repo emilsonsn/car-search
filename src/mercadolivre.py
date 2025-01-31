@@ -11,7 +11,14 @@ import re
 
 data_atual = datetime.datetime.now().strftime('%Y-%m-%d')
 os.makedirs('logs', exist_ok=True)
-logging.basicConfig(level=logging.INFO, filename=f'logs/app_{data_atual}.log', filemode='a', format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(f'logs/app_{data_atual}.log', mode='a'),
+        logging.StreamHandler()  # Adiciona saída para o console
+    ]
+)
 
 class MercadoLivre():
     def process_link(self, link):
