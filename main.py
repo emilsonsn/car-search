@@ -123,6 +123,9 @@ class Main:
                 except Exception as e:
                     logging.info(f'erro {e}')                    
             logging.info('Esperando 5 minutos ---')
+            # link = 'https://www.webmotors.com.br/carros/estoque/chevrolet/onix?estadocidade=estoque&marca1=CHEVROLET&modelo1=ONIX&lkid=1038'
+            # self.webmotors.process_link(link)
+        
             sleep(60 * 5)
             
 if __name__ == "__main__":
