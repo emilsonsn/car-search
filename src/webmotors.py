@@ -77,10 +77,12 @@ class Webmotors:
         try:
             logging.info('Procurando carros ---')
 
-            data_for_telegram = []
             
             with open("links/linksWebmotors.txt", "r", encoding="utf-8") as file:
-                links_existentes = file.read().splitlines()
+                #links_existentes = file.read().splitlines()
+                links_existentes = [line.strip().rstrip(",") for line in file]
+            data_for_telegram = []
+                
 
             for car in cars_data.get('SearchResults', []):
                 title = car['Specification']['Title']
@@ -94,7 +96,7 @@ class Webmotors:
 
                 if href not in links_existentes:
                     with open("links/linksWebmotors.txt", "a", encoding="utf-8") as file:
-                        file.write(href + "\n")
+                        file.write(href + ",\n")
                     data_car = [title_formatted, value_formatted, href, km, year]
                     data_for_telegram.append(data_car)
 
