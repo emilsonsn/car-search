@@ -78,10 +78,10 @@ class Webmotors:
             logging.info('Procurando carros ---')
 
             
-            with open("links/linksWebmotors.txt", "r", encoding="utf-8") as file:
-                #links_existentes = file.read().splitlines()
-                links_existentes = [line.strip().rstrip(",") for line in file]
             data_for_telegram = []
+            
+            with open("links/linksWebmotors.txt", "r", encoding="utf-8") as file:
+                links_existentes = {line.strip() for line in file if line.strip()}
                 
 
             for car in cars_data.get('SearchResults', []):
@@ -96,14 +96,16 @@ class Webmotors:
 
                 if href not in links_existentes:
                     with open("links/linksWebmotors.txt", "a", encoding="utf-8") as file:
-                        file.write(href + ",\n")
+                        file.write(href + "\n")
                     data_car = [title_formatted, value_formatted, href, km, year]
                     data_for_telegram.append(data_car)
 
             if len(links_existentes) > 2000:
                 links_existentes = links_existentes[-2000:]
                 with open('links/linksWebmotors.txt', "w", encoding="utf-8") as file:
-                    file.write("\n".join(links_existentes) + ",\n")            
+                    file.write("\n".join(links_existentes) + "\n")            
+                    
+                    
             return data_for_telegram
         except Exception as error:
             logging.error(f'Erro ao tentar encontrar carros: {error}')
