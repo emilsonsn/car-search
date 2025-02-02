@@ -72,7 +72,7 @@ class MercadoLivre():
                             
                 if len(links_existentes) > 2000:
                     links_existentes = links_existentes[-2000:]
-                    with open('links/linksWebmotors.txt', "w", encoding="utf-8") as file:
+                    with open('links/linksML.txt', "w", encoding="utf-8") as file:
                         file.write("\n".join(links_existentes) + ",\n")
                             
                 if page == 1: break

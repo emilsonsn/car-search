@@ -97,7 +97,7 @@ class Main:
             links = self.getLinks()
             for link in links:
                 self.close_chrome()
-                sleep(15)
+                sleep(5)
                 try:
                     url = link['url']
                     site = link['site']
@@ -119,14 +119,13 @@ class Main:
     
                     if(len(results)):
                         print('Iniciando disparo de mensagens no telegram')
-                        self.send_results_telegram(results, site, groups)                                
+                        self.send_results_telegram(results, site, groups)
+                    sleep( 60 * 1 )
                 except Exception as e:
                     logging.info(f'erro {e}')                    
             logging.info('Esperando 5 minutos ---')
-            # link = 'https://www.webmotors.com.br/carros/estoque/chevrolet/onix?estadocidade=estoque&marca1=CHEVROLET&modelo1=ONIX&lkid=1038'
-            # self.webmotors.process_link(link)
         
-            sleep(60 * 5)
+            sleep( 60 * 5 )
             
 if __name__ == "__main__":
     main = Main()

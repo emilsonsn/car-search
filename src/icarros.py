@@ -81,7 +81,7 @@ class ICarros:
                 
             if len(links_existentes) > 2000:
                 links_existentes = links_existentes[-2000:]
-                with open('links/linksWebmotors.txt', "w", encoding="utf-8") as file:
+                with open('links/linksIcarros.txt', "w", encoding="utf-8") as file:
                     file.write("\n".join(links_existentes) + ",\n")
                             
             return data_for_telegram
