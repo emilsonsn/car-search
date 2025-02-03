@@ -57,7 +57,7 @@ class Webmotors:
             elif system == "Linux":
                 self.driver = webdriver.Chrome(service=service, options=self.options)
             
-            url = f'https://www.webmotors.com.br/api/search/car?url={link}&actualPage=1&displayPerPage=70'
+            url = f'https://www.webmotors.com.br/api/search/car?url={link}&actualPage=1&displayPerPage=100'
             self.driver.get(url)
 
             data_json = json.loads(self.driver.find_element(By.CSS_SELECTOR, 'pre').text)
