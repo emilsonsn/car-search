@@ -94,6 +94,9 @@ class Main:
 
     def main(self):
         while True:
+            # link = 'https://www.webmotors.com.br/carros/estoque/ram?estadocidade=estoque&marca1=RAM&autocomplete=RAM&autocompleteTerm=RAM&lkid=1704'
+            # self.webmotors.process_link(link)
+            
             links = self.getLinks()
             for link in links:
                 self.close_chrome()

@@ -49,7 +49,7 @@ class MercadoLivre():
                 links_existentes = [line.strip().rstrip(",") for line in file]
             data_for_telegram = []     
         
-            for page in range(2):
+            for page in range(3):
                 logging.info('Procurando carros ---')
                 sleep(10)
                 li_list = self.driver.find_elements(By.CSS_SELECTOR, '.ui-search-layout__item')
@@ -75,9 +75,10 @@ class MercadoLivre():
                     with open('links/linksML.txt', "w", encoding="utf-8") as file:
                         file.write("\n".join(links_existentes) + ",\n")
                             
-                if page == 1: break
-                self.second_page()
-                                
+                if page == 2: break
+                elif page == 1: self.terceira_page()
+                else: self.second_page()
+                                                
                 sleep(5)
             return data_for_telegram
         
@@ -99,3 +100,21 @@ class MercadoLivre():
                 b.click()
                 sleep(10)
                 break
+                
+    def terceira_page(self):
+        try:
+            logging.info('Indo para próxima página ---')
+            botao = self.driver.find_element(By.CSS_SELECTOR, '.andes-pagination.ui-search-andes-pagination.andes-pagination--large')                        
+            self.driver.execute_script("arguments[0].scrollIntoView();", botao)
+            sleep(5)
+            botaos = self.driver.find_elements(By.CSS_SELECTOR, '.andes-pagination__link')
+            for b in botaos:
+                if b.text.strip() == '3':
+                    b.click()
+                    sleep(10)
+                    break
+                
+        except Exception as error:
+            logging.error(f'Erro ao tentar encontrar botões: {error}')
+            logging.error('Traceback: %s', traceback.format_exc())
+            raise Exception('Erro ao encontrar botões')

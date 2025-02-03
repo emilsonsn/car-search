@@ -51,7 +51,7 @@ class Olx:
                 links_existentes = [line.strip().rstrip(",") for line in file]
             data_for_telegram = []
             
-            for page in range(2):  
+            for page in range(3):  
                 logging.info('Procurando carros ---')
                 sleep(10)
                 cars = self.driver.find_elements(By.CSS_SELECTOR, 'section[data-ds-component="DS-AdCard"]')
@@ -75,9 +75,11 @@ class Olx:
                     links_existentes = links_existentes[-2000:]
                     with open('links/linksOlx.txt', "w", encoding="utf-8") as file:
                         file.write("\n".join(links_existentes) + ",\n")
-                            
-                if page == 1: break
-                self.second_page()
+                        
+                if page == 2: break
+                elif page == 1: self.terceira_page()
+                else: self.second_page()
+                
                 sleep(5)
                 
             return data_for_telegram
@@ -90,7 +92,7 @@ class Olx:
             
     def second_page(self):
         try:
-            logging.info('Indo para segunda página ---')
+            logging.info('Indo para próxima página ---')
             botao = self.driver.find_element(By.CSS_SELECTOR, '.sc-5ebad952-1.wskjO')    
             self.driver.execute_script("arguments[0].scrollIntoView();", botao)
             sleep(5)
@@ -99,8 +101,29 @@ class Olx:
                 if b.text.strip() == '2':
                     b.click()
                     sleep(10)
+                    self.page_second = True
                     break
+    
         except Exception as error:
             logging.error(f'Erro ao tentar encontrar botões: {error}')
             logging.error('Traceback: %s', traceback.format_exc())
             raise Exception('Erro ao encontrar botões')
+        
+    def terceira_page(self):
+        try:
+            logging.info('Indo para próxima página ---')
+            botao = self.driver.find_element(By.CSS_SELECTOR, '.sc-5ebad952-1.wskjO')    
+            self.driver.execute_script("arguments[0].scrollIntoView();", botao)
+            sleep(5)
+            botaos = self.driver.find_elements(By.CSS_SELECTOR, '.olx-core-button.olx-core-button--link.olx-core-button--small.sc-5ebad952-0.gVRVOX')
+            for b in botaos:
+                if b.text.strip() == '3':
+                    b.click()
+                    sleep(10)
+                    break
+                
+        except Exception as error:
+            logging.error(f'Erro ao tentar encontrar botões: {error}')
+            logging.error('Traceback: %s', traceback.format_exc())
+            raise Exception('Erro ao encontrar botões')
+                
