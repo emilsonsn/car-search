@@ -57,7 +57,7 @@ class Webmotors:
             elif system == "Linux":
                 self.driver = webdriver.Chrome(service=service, options=self.options)
             
-            url = f'https://www.webmotors.com.br/api/search/car?url={link}&actualPage=1&displayPerPage=100'
+            url = f'https://www.webmotors.com.br/api/search/car?url={link}&actualPage=1&displayPerPage=1000'
             self.driver.get(url)
 
             data_json = json.loads(self.driver.find_element(By.CSS_SELECTOR, 'pre').text)
@@ -77,12 +77,10 @@ class Webmotors:
         try:
             logging.info('Procurando carros ---')
 
-            
             data_for_telegram = []
             
             with open("links/linksWebmotors.txt", "r", encoding="utf-8") as file:
                 links_existentes = {line.strip() for line in file if line.strip()}
-                
 
             for car in cars_data.get('SearchResults', []):
                 title = car['Specification']['Title']
@@ -100,12 +98,11 @@ class Webmotors:
                     data_car = [title_formatted, value_formatted, href, km, year]
                     data_for_telegram.append(data_car)
 
-            if len(links_existentes) > 2000:
-                links_existentes = links_existentes[-2000:]
+            if len(links_existentes) > 10000:
+                links_existentes = links_existentes[-10000:]
                 with open('links/linksWebmotors.txt', "w", encoding="utf-8") as file:
                     file.write("\n".join(links_existentes) + "\n")            
-                    
-                    
+                                        
             return data_for_telegram
         except Exception as error:
             logging.error(f'Erro ao tentar encontrar carros: {error}')
