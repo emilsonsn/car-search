@@ -54,12 +54,19 @@ class Olx:
             for page in range(3):  
                 logging.info('Procurando carros ---')
                 sleep(10)
-                cars = self.driver.find_elements(By.CSS_SELECTOR, 'section[data-ds-component="DS-AdCard"]')
+                selectors= [
+                    'section[data-ds-component="DS-AdCard"]',
+                    'section[data-mode="vertical"]'
+                ]
+
+                for selector in selectors:
+                    cars = self.driver.find_elements(By.CSS_SELECTOR, selector)
+                    if len(cars): break
                 for car in cars:
-                    link_element = car.find_element(By.CSS_SELECTOR, "a[data-ds-component='DS-NewAdCard-Link']")
+                    link_element = car.find_element(By.CSS_SELECTOR, "a")
                     title_element = car.find_element(By.CSS_SELECTOR, 'h2')
-                    value_element = car.find_element(By.CSS_SELECTOR, 'h3.olx-ad-card__price')
-                    km = car.find_elements(By.CSS_SELECTOR, '.olx-ad-card__labels-item')
+                    value_element = car.find_element(By.CSS_SELECTOR, 'h3')
+                    km = car.find_elements(By.CSS_SELECTOR, 'div[aria-label]')
                     km = km[0].text.strip()
                     value = value_element.text.strip()
                     title = title_element.text.strip()
