@@ -94,15 +94,17 @@ class MercadoLivre():
                 sleep(10)
                 li_list = self.driver.find_elements(By.CSS_SELECTOR, '.ui-search-layout__item')
                 for li in li_list:
-                    link_element = li.find_element(By.CSS_SELECTOR, '.poly-component__title')
-                    value_element = li.find_element(By.CSS_SELECTOR, '.andes-money-amount__fraction')
-                    km_year = li.find_elements(By.CSS_SELECTOR, '.poly-attributes-list__item.poly-attributes-list__separator')
-                    year = km_year[0].text
-                    km = km_year[1].text
-                    href = link_element.get_attribute("href")
-                    title = link_element.get_attribute("text")
-                    value = value_element.text.strip() 
-                    href_limpo = re.sub(r'#.*', '', href)
+                    try:
+                        link_element = li.find_element(By.CSS_SELECTOR, '.poly-component__title')
+                        value_element = li.find_element(By.CSS_SELECTOR, '.andes-money-amount__fraction')
+                        km_year = li.find_elements(By.CSS_SELECTOR, '.poly-attributes-list__item.poly-attributes-list__separator')
+                        year = km_year[0].text
+                        km = km_year[1].text
+                        href = link_element.get_attribute("href")
+                        title = link_element.get_attribute("text")
+                        value = value_element.text.strip() 
+                        href_limpo = re.sub(r'#.*', '', href)
+                    except:continue
                     
                     with open("links/linksML.txt", "a", encoding="utf-8") as file:
                         if href_limpo not in links_existentes:
