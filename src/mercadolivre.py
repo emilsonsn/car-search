@@ -1,11 +1,14 @@
-from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
+from selenium import webdriver
 import traceback
 import logging
+import subprocess
 from time import sleep
 import datetime
+import platform
 import os
 import re
 
@@ -23,20 +26,57 @@ logging.basicConfig(
 class MercadoLivre():
     def process_link(self, link):
         try:
-            logging.info('Abrindo site do Mercado Livre ---')
-            self.options = uc.ChromeOptions()
-            self.options.add_argument("--disable-infobars")
-            self.options.add_argument("--disable-extensions")
-            self.options.add_argument("--no-sandbox")
-            self.options.add_argument("--headless") 
-            service = ChromeService(ChromeDriverManager().install())
-            self.driver = uc.Chrome(service=service, options=self.options)  
+            
+            system = platform.system()
+            
+            self.options = [
+                '--no-sandbox',
+                '--disable-gpu',
+                '--disable-extensions',
+                '--disable-infobars',
+                '--log-level=3',
+                '--remote-debugging-port=9222',
+            ]            
+            self.options = " ".join(self.options)            
+            if system == "Windows":
+                subprocess.Popen(
+                    f'"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" {self.options}', shell=True)
+            elif system == "Linux":
+                subprocess.Popen(
+                    f'/usr/bin/google-chrome {self.options}', shell=True)
+            
+
+                
+            service = Service()
+            self.options = webdriver.ChromeOptions()
+            self.options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")         
+
+            if system == "Windows":
+                self.driver = webdriver.Chrome(service=service, options=self.options)
+            elif system == "Linux":
+                self.driver = webdriver.Chrome(service=service, options=self.options)
+                
             self.driver.get(link)
             sleep(10)
             data_for_telegram = self.get_cars()
-            try: self.driver.quit()
-            except: pass
             return data_for_telegram
+            
+            
+            
+            # logging.info('Abrindo site do Mercado Livre ---')
+            # self.options = uc.ChromeOptions()
+            # self.options.add_argument("--disable-infobars")
+            # self.options.add_argument("--disable-extensions")
+            # self.options.add_argument("--no-sandbox")
+            # self.options.add_argument("--headless") 
+            # service = ChromeService(ChromeDriverManager().install())
+            # self.driver = uc.Chrome(service=service, options=self.options)  
+            # self.driver.get(link)
+            # sleep(10)
+            # data_for_telegram = self.get_cars()
+            # try: self.driver.quit()
+            # except: pass
+            # return data_for_telegram
          
         except Exception as error:
             logging.error(f'Erro ao abrir site: {error}')

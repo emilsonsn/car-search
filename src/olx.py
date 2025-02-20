@@ -1,8 +1,11 @@
-from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
+import subprocess
+from selenium import webdriver
 import traceback
+import platform
 import logging
 from time import sleep
 import datetime
@@ -22,15 +25,37 @@ logging.basicConfig(
 
 class Olx:
     def process_link(self, link):
+        logging.info('Abrindo site da OLX ---')
         try:
-            logging.info('Abrindo site da OLX ---')
-            self.options = uc.ChromeOptions()
-            self.options.add_argument("--disable-infobars")
-            self.options.add_argument("--disable-extensions")
-            self.options.add_argument("--no-sandbox")
-            #self.options.add_argument("--headless") 
-            service = ChromeService(ChromeDriverManager().install())
-            self.driver = uc.Chrome(service=service, options=self.options)  
+            system = platform.system()
+            
+            self.options = [
+                '--no-sandbox',
+                '--disable-gpu',
+                '--disable-extensions',
+                '--disable-infobars',
+                '--log-level=3',
+                '--remote-debugging-port=9222',
+            ]            
+            self.options = " ".join(self.options)            
+            if system == "Windows":
+                subprocess.Popen(
+                    f'"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" {self.options}', shell=True)
+            elif system == "Linux":
+                subprocess.Popen(
+                    f'/usr/bin/google-chrome {self.options}', shell=True)
+            
+
+                
+            service = Service()
+            self.options = webdriver.ChromeOptions()
+            self.options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")         
+
+            if system == "Windows":
+                self.driver = webdriver.Chrome(service=service, options=self.options)
+            elif system == "Linux":
+                self.driver = webdriver.Chrome(service=service, options=self.options)
+                
             self.driver.get(link)
             sleep(10)
             data_for_telegram = self.get_cars()
@@ -39,6 +64,17 @@ class Olx:
                 self.driver.quit()
             except: pass
             return data_for_telegram
+            
+            
+            # self.options = uc.ChromeOptions()
+            # self.options.add_argument("--disable-infobars")
+            # self.options.add_argument("--disable-extensions")
+            # self.options.add_argument("--no-sandbox")
+            # #self.options.add_argument("--headless") 
+            # service = ChromeService(ChromeDriverManager().install())
+            # self.driver = uc.Chrome(service=service, options=self.options)  
+            # self.driver.get(link)
+            # sleep(10)
                        
         except Exception as error:
             logging.error(f'Erro ao abrir site: {error}')
@@ -63,21 +99,24 @@ class Olx:
                     cars = self.driver.find_elements(By.CSS_SELECTOR, selector)
                     if len(cars): break
                 for car in cars:
-                    link_element = car.find_element(By.CSS_SELECTOR, "a")
-                    title_element = car.find_element(By.CSS_SELECTOR, 'h2')
-                    value_element = car.find_element(By.CSS_SELECTOR, 'h3')
-                    km = car.find_elements(By.CSS_SELECTOR, 'div[aria-label]')
-                    km = km[0].text.strip()
-                    value = value_element.text.strip()
-                    title = title_element.text.strip()
-                    href = link_element.get_attribute("href")
-                    href_limpo = re.sub(r'[\?&]utm_[^=]+=[^&]+', '', href)
-                    with open("links/linksOlx.txt", "a", encoding="utf-8") as file:
-                        if href_limpo not in links_existentes:
-                            file.write(href_limpo + ",\n")
-                            data_car = [title, value, href_limpo, km]
-                            data_for_telegram.append(data_car)
-                
+                    try:
+                        link_element = car.find_element(By.CSS_SELECTOR, "a")
+                        title_element = car.find_element(By.CSS_SELECTOR, 'h2')
+                        value_element = car.find_element(By.CSS_SELECTOR, 'h3')
+                        km = car.find_elements(By.CSS_SELECTOR, '.olx-ad-card__labels-item')
+                        km = km[0].text.strip()
+                        value = value_element.text.strip()
+                        title = title_element.text.strip()
+                        href = link_element.get_attribute("href")
+                        href_limpo = re.sub(r'[\?&]utm_[^=]+=[^&]+', '', href)
+                        with open("links/linksOlx.txt", "a", encoding="utf-8") as file:
+                            if href_limpo not in links_existentes:
+                                file.write(href_limpo + ",\n")
+                                data_car = [title, value, href_limpo, km]
+                                data_for_telegram.append(data_car)
+                                
+                    except: continue
+                    
                 if len(links_existentes) > 2000:
                     links_existentes = links_existentes[-2000:]
                     with open('links/linksOlx.txt', "w", encoding="utf-8") as file:

@@ -94,8 +94,10 @@ class Main:
 
     def main(self):
         while True:
-            # link = 'https://www.webmotors.com.br/carros/estoque/ram?estadocidade=estoque&marca1=RAM&autocomplete=RAM&autocompleteTerm=RAM&lkid=1704'
-            # self.webmotors.process_link(link)
+            # linkOlx = 'https://www.olx.com.br/brasil?q=ram'
+            # links = self.olx.process_link(linkOlx)
+            # linkOlx = 'https://lista.mercadolivre.com.br/ram-rampage#D[A:ram%20rampage]'
+            # links = self.olx.process_link(linkOlx)
             
             links = self.getLinks()
             for link in links:
